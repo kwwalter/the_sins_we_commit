@@ -2,8 +2,21 @@ Rails.application.routes.draw do
 
   root 'application#welcome'
 
-  # resources :users, only: [:create]    // give all seven... and then limit to just one of them.
+  get '/amiloggedin/' => 'application#amiloggedin'
+
+  # give all seven... and then limit to just one of them.
+  # resources :users
+  # resources :users, only: [:create]
+
+  # this line is the same as line 7
   post '/users' => 'users#create'
+
+
+  # session stuff
+  # get '/session' => 'session#current_user'
+  #       angular?
+  post '/session' => 'session#create'
+  delete '/session' => 'session#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

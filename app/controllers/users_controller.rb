@@ -1,9 +1,21 @@
 class UsersController < ApplicationController
 
   def create
-    fail
+    @user = User.new(user_params)
 
-    redirect_to: root_path
+    if @user.save
+      flash[:message] = "good job, you're now an active sinner. Log in to repent!"
+    else
+      flash[:message] = @user.errors.full_messages.to_sentence
+    end
+
+    redirect_to root_path
+  end
+
+  private
+
+  def user_params
+    return params.require(:user).permit(:email, :password)
   end
 
 end
