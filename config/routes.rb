@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'application#welcome'
 
+  resources :transgressions
+
   get '/amiloggedin/' => 'application#amiloggedin'
 
   # give all seven... and then limit to just one of them.

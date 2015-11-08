@@ -28,4 +28,12 @@ class ApplicationController < ActionController::Base
     # @current_user ||= session[:current_user_id] && User.find(session[:current_user_id])
   end
 
+  def logged_in?
+    !!current_user
+  end
+
+  def require_current_user
+    redirect_to root_path unless logged_in?
+  end
+
 end

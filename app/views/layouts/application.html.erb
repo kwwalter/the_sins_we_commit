@@ -7,6 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render partial: 'layouts/header' %>
+
   <% if flash[:message] %>
     <div class="alert">
       <%= flash[:message] %>
@@ -22,5 +24,10 @@
     <input type="submit" value="Log out!">
   </form>
 <% end %>
+
+
+<!-- This does the same thing as the form above!! -->
+<!-- <%= button_to "Log Out", session_path, method: :delete, class: "buttony-thing" %> -->
+
 </body>
 </html>
