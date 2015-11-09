@@ -1,5 +1,8 @@
 class SessionController < ApplicationController
 
+  # again, don't do this! just doing this for postman testing--try on group project too
+  # skip_before_action :verify_authenticity_token, only: :create
+
   def create
     user = User.find_by(email: user_params[:email])
 
@@ -19,6 +22,10 @@ class SessionController < ApplicationController
 
     flash[:message] = "You have successfully logged out"
     redirect_to root_path
+  end
+
+  def current_sinner
+
   end
 
 

@@ -1,19 +1,13 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   # helper_methods are methods that can be used inside of views
   helper_method :current_user
 
   def welcome
     render '/welcome'
-  end
-
-  def amiloggedin
-    amiloggedin = !!session[:current_user_id]
-    # render text: amiloggedin ? "yes" : "no"
-    render json: current_user
   end
 
   private

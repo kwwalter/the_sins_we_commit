@@ -2,23 +2,21 @@ Rails.application.routes.draw do
 
   root 'application#welcome'
 
-  resources :transgressions do
-    resources :confessions, shallow: true
+  resources :transgressions, only: [:index, :create],  defaults: { format: :json } do
+    resources :confessions, only: [:create], shallow: true
   end
-
-  get '/amiloggedin/' => 'application#amiloggedin'
 
   # give all seven... and then limit to just one of them.
   # resources :users
   # resources :users, only: [:create]
 
-  # this line is the same as line 7
+  # this line is the same `resources :users, only: [:create]`
   post '/users' => 'users#create'
 
 
   # session stuff
-  # get '/session' => 'session#current_user'
-  #       angular?
+
+  get '/session' => 'session#current_sinner', defaults: { format: :json }
   post '/session' => 'session#create'
   delete '/session' => 'session#destroy'
 

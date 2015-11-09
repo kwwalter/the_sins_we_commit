@@ -2,37 +2,25 @@ class TransgressionsController < ApplicationController
 
   before_action :require_current_user
 
-  def new
-    @transgression = Transgression.new(sin_type: "None")
+  # DON'T DO THIS!!! Creating a SPA, not an open API
+  # skip_before_action :verify_authenticity_token, only: :create
+
+  def index
+    @transgressions = current_user.transgressions.includes(:confessions)
   end
 
   def create
     @transgression = current_user.transgressions.new(transgression_params)
 
-    @confession = @transgression.confessions.new(confession_params)
-
-    if @transgression.save && @confession.save
-      redirect_to transgressions_path
+    if @transgression.save
+      # will render create.json.jbuilder. For an API, you can't redirect.
     else
-      flash[:message] = @transgression.errors.full_messages.to_sentence
-      render :new
+      render json: {
+        error: {
+          message: @transgression.errors.full_messages.to_sentence
+        }
+      }
     end
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def show
-  end
-
-  def index
-    @transgressions = current_user.transgressions.includes(:confessions).group_by { |x| x.sin_type }
-  end
-
-  def delete
   end
 
   private
@@ -41,8 +29,5 @@ class TransgressionsController < ApplicationController
     return params.require(:transgression).permit(:sin_type, :description)
   end
 
-  def confession_params
-    return params.require(:confession).permit(:description, :occurred_at)
-  end
 
 end
