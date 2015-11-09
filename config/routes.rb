@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :confessions
   root 'application#welcome'
 
-  resources :transgressions
+  resources :transgressions do
+    resources :confessions, shallow: true
+  end
 
   get '/amiloggedin/' => 'application#amiloggedin'
 
