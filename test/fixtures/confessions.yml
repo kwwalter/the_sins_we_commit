@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transgression_id: 
+  occured_at: 2015-11-08
+  description: MyString
+
+two:
+  transgression_id: 
+  occured_at: 2015-11-08
+  description: MyString

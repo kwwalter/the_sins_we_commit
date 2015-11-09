@@ -5,10 +5,11 @@ class Transgression < ActiveRecord::Base
   ]
 
   validates :description, presence: true
-  validates :user, presence: true
+  validates :sinner, presence: true
   validates :sin_type, inclusion: { in: SIN_TYPES }
 
-  belongs_to :user
+  belongs_to :sinner, class_name: "User", foreign_key: :user_id
+  has_many :confessions, dependent: :destroy
 end
 
 # Transgression::SIN_TYPES will allow us to access class constants anywhere.

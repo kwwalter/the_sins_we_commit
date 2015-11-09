@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
     allow_nil: true # because sometimes there won't be a password, like when we have only a password_digest. it'll be nothing if we only change the email address
   }
 
-  has_many :transgressions
+  has_many :transgressions, dependent: :destroy
+  has_many :confessions, through: :transgressions
 end
